@@ -25,15 +25,30 @@ public class WebshopServlet extends HttpServlet {
             String username = (String)session.getAttribute("cart");
             Cart cart = (Cart)session.getAttribute("cart");
             response.setContentType("text/html; charset=ISO-8859-1");
+
+            request.setAttribute("name", username);
+            request.setAttribute("cart", cart);
+            request.getRequestDispatcher("webshop.jsp").forward(request, response);
         }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
-        String name = request.getParameter("Username");
-        if(name == null) name = "Person";
-        request.setAttribute("user", name);
-        if (!(name.equals("Arne"))) request.getRequestDispatcher("loginFail.jsp").forward(request, response);
-        else request.getRequestDispatcher("response.jsp").forward(request, response); 
+        
+            HttpSession session = request.getSession(false);
+
+            if(session == null || session.getAttribute("username") == null) 
+                response.sendRedirect("login" + "?requiresLogin");
+            else {
+                Cart cart = (Cart) session.getAttribute("cart");
+
+                if(request.getParameter("bukse") != null) {
+                    cart.addItem(new CartItem("Bukse", 699.0));
+                }
+                if(request.getParameter("genser") != null) {
+                    cart.addItem(new CartItem("Genser", 399.0));
+                }
+                response.sendRedirect("webshop");
+            }
     }
 }
