@@ -1,18 +1,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
+    <meta charset="ISO-8859-1">
     <title>Login failed</title>
   </head>
   <body>
-    <div style="text-align: center; margin: 0 auto;">
-        <p>Webshop</p>
-        <p style="color: red">Wrong username, try again</p> 
-
-        <form method="post" action="hello">  
-        <h2>Username:</h2>
-        <input type="text" id="say-hello-text-input" name="Username" />
-        <input type="submit" id="say-hello-button" value="Login" />
-        </form>
-    </div>
+    <p style="color: red;">${requiresLoginRedirect
+       ? "Request requires login" : "Invalid or missing username"}</p>
+    <form action="login" method="post">
+      <fieldset>
+        <legend>Login</legend>
+        <p>Name: <input type="text" name="username"/></p>
+        <p><input type="submit" value="Log in"/></p>
+      </fieldset>
+    </form>
   </body>
 </html>
