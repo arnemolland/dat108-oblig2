@@ -13,10 +13,10 @@
                 <th>Vare</th>
                 <th>Pris</th>
             </tr>
-            <c:forEach items="${cart}" var="item">
+            <c:forEach items="${cartItems}" var="item">
                 <tr>
-                <td><c:out value="${item.name}" /></td>
-                <td align="right"><c:out value="${item.price}"/></td>
+                <td>${item.name}</td>
+                <td align="right">${item.price}</td>
                 </tr>
             </c:forEach>
         </table><br/>

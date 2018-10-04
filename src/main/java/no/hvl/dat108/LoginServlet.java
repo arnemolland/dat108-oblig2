@@ -24,7 +24,7 @@ public class LoginServlet extends HttpServlet {
 
         request.setAttribute("requiresLoginRedirect", requiresLoginRedirect);
         request.setAttribute("invalidUsernameRedirect", invalidUsernameRedirect);
-        request.getRequestDispatcher("loginError.jsp").forward(request, response);
+        request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request,

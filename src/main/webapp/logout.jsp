@@ -5,7 +5,6 @@
         <meta charset = "ISO-8859-1">
         <title>Logged out</title>
     </head>
-
     <body>
         <p>You're logged out.</p>
     </body>

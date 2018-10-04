@@ -2,8 +2,8 @@
 *.class
 
 # Build files
-build/
-build\
+build/*
+build\*
 
 # Gradle
 .gradle/

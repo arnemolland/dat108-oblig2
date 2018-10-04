@@ -1,16 +1,15 @@
 <html>
   <head>
-    <title>Web Demo</title>
+    <meta charset="ISO-8859-1">
+    <title>Login</title>
   </head>
   <body>
-    <div style="text-align: center; margin: 0 auto;">
-      <p>Webshop</p> 
-
-      <form method="post" action="hello">  
-        <h2>Username:</h2>
-        <input type="text" id="say-hello-text-input" name="Username" />
-        <input type="submit" id="say-hello-button" value="Login" />
-      </form>
-    </div>
+    <form action="login" method="post">
+      <fieldset>
+        <legend>Login</legend>
+        <p>Name: <input type="text" name="username"/></p>
+        <p><input type="submit" value="Log in"/></p>
+      </fieldset>
+    </form>
   </body>
 </html>
