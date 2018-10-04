@@ -3,9 +3,11 @@
 
 # Build files
 build/
+build\
 
 # Gradle
 .gradle/
+.gradle\
 
 # Log file
 *.log
