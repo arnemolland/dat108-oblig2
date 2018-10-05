@@ -16,7 +16,7 @@ public class Validator {
      *         er bokstaver (sm� og store) inkl. de norske bokstavene, og tall.
      *         Brukernavnet kan ikke begynne med et tall.
      */
-    public static boolean isValidUsername(String username) {
+    public static boolean isValidPassword(String username) {
 
         if (username == null) {
             return false;
@@ -25,6 +25,7 @@ public class Validator {
                 + ANY_LETTER_OR_DIGIT + THREE_TIMES 
                 + ANY_LETTER_OR_DIGIT + ZERO_OR_MORE_TIMES + "$");
     }
+
 }
 
 

@@ -7,14 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
 
-@WebServlet(name = "WebshopServlet", urlPatterns = {"webshop"}, loadOnStartup = 1) 
+@WebServlet(name = "TodoApp", urlPatterns = {"todoapp"}, loadOnStartup = 1) 
 public class WebshopServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    public List<CartItem> cartItems = new ArrayList<CartItem>();
+    private TodoList todoList = new TodoList();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -22,16 +20,16 @@ public class WebshopServlet extends HttpServlet {
         response.getWriter().print("Hello, World!");
         HttpSession session = request.getSession(false);
 
-        if(session == null || session.getAttribute("username") == null)
+        if(session == null || session.getAttribute("password") == null)
             response.sendRedirect("login" + "?requiresLogin");
         else {
-            String username = (String)session.getAttribute("username");
-            Cart cart = (Cart)session.getAttribute("cart");
+            String password = (String)session.getAttribute("password");
+            TodoList todoList = (TodoList)session.getAttribute("todoList");
             response.setContentType("text/html; charset=ISO-8859-1");
 
-            request.setAttribute("name", username);
-            request.setAttribute("cart", cart);
-            request.getRequestDispatcher("webshop.jsp").forward(request, response);
+            request.setAttribute("name", password);
+            request.setAttribute("todoList", todoList);
+            request.getRequestDispatcher("todoApp.jsp").forward(request, response);
         }
     }
 
@@ -40,19 +38,18 @@ public class WebshopServlet extends HttpServlet {
         
             HttpSession session = request.getSession(false);
 
-            if(session == null || session.getAttribute("username") == null) 
+            if(session == null || session.getAttribute("password") == null) 
                 response.sendRedirect("login" + "?requiresLogin");
             else {
-                Cart cart = (Cart) session.getAttribute("cart");
-                cartItems = cart.getItems();
+                 todoList = (TodoList) session.getAttribute("todoList");
 
                 if(request.getParameter("bukse") != null) {
-                    cart.addItem(new CartItem("Bukse", 699.0));
+                    todoList.addItem(new TodoItem("Bukse"));
                 }
                 if(request.getParameter("genser") != null) {
-                    cart.addItem(new CartItem("Genser", 399.0));
+                    todoList.addItem(new TodoItem("Genser"));
                 }
-                response.sendRedirect("webshop");
+                response.sendRedirect("todoapp");
             }
     }
 }

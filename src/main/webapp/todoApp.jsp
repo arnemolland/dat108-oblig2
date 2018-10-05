@@ -3,24 +3,23 @@
 <html>
     <head>
         <meta charset="ISO-8859-1">
-        <title>Webshop</title>
+        <title>Todo-app</title>
     </head>
     <body>
-        <p>Du er innlogget som ${username}</p>
-        <p>Din handlekurc:<br/></p>
+        <p>Du er innlogget som ${password}</p>
+        <p>Your Todo-items<br/></p>
         <table border="1">
             <tr>
                 <th>Vare</th>
                 <th>Pris</th>
             </tr>
-            <c:forEach items="${cartItems}" var="item">
+            <c:forEach items="${todoItems}" var="item">
                 <tr>
                 <td>${item.name}</td>
-                <td align="right">${item.price}</td>
                 </tr>
             </c:forEach>
         </table><br/>
-        <form action="webshop" method="POST">
+        <form action="todoapp" method="POST">
             <fieldset>
                 <legend>Handle</legend>
                 <input type="checkbox" name="bukse"/>Bukse<br/>
