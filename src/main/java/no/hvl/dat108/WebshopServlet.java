@@ -41,6 +41,9 @@ public class WebshopServlet extends HttpServlet {
             if(session == null || session.getAttribute("password") == null) 
                 response.sendRedirect("login" + "?requiresLogin");
             else {
+                if(request.getParameter("deleteItem") != null){
+                    todoList.removeItem(request.getParameter("deleteItem"));
+                }
                 if(request.getParameter("item") != null ) {
                     String postedItem = (String) request.getParameter("item");
                     postedItem = cleanInput(postedItem);

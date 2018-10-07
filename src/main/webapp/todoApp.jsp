@@ -14,7 +14,13 @@
             </tr>
             <c:forEach items="${todoList.getItems()}" var="item">
                 <tr>
-                <td><c:out value="${item.name}"/></td>
+                <td>
+                    <c:out value="${item.name}"/>
+                    <form action="todoapp" method="POST">
+                        <input type="hidden" name="deleteItem" value=${item.name}/>
+                        <input type="submit" value="Delete"/>
+                    </form>
+                </td>
                 </tr>
             </c:forEach>
         </table><br/>
