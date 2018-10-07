@@ -29,7 +29,7 @@
             <fieldset>
               <legend>Add items</legend>
               <p>Item: <input type="text" name="item"/></p>
-              <p><input type="submit" value="Legg til"/></p>
+              <p><input type="submit" value="Add"/></p>
             </fieldset>
           </form>
         <form action="logout" method="GET">
