@@ -32,12 +32,12 @@
               <p><input type="submit" value="Add"/></p>
             </fieldset>
           </form>
-        <form action="logout" method="GET">
+        <!--form action="logout" method="GET">
             <fieldset>
                 <p>
                     <input type="submit" value="Log out"/>
                 </p>
             </fieldset>
-        </form>
+        </form-->
     </body>
 </html>

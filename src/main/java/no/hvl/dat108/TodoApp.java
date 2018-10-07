@@ -51,9 +51,9 @@ public class TodoApp extends HttpServlet {
                 if(request.getParameter("item") != null ) {
                     String postedItem = (String) request.getParameter("item");
                     postedItem = cleanInput(postedItem);
-                    if(!Validator.isInvalid(postedItem)){
+                    if(!Validator.isInvalid(postedItem))
                         todoList.addItem(new TodoItem(postedItem));
-                    }
+                        
                     session.setAttribute("todoList", todoList);
                     response.sendRedirect("todoapp");
                 };

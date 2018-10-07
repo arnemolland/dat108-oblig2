@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 
-@WebServlet(name = "LoginServlet", urlPatterns = {"login", "/"}, loadOnStartup = 1, initParams = {@WebInitParam(name="pwd", value="dat108")}) 
+@WebServlet(name = "LoginServlet", urlPatterns = {"login", "/"}, loadOnStartup = 1, initParams = {@WebInitParam(name="pwd", value="dat108"), @WebInitParam(name="maxSec", value="10")}) 
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -46,7 +46,7 @@ public class LoginServlet extends HttpServlet {
             if(session != null)
                 session.invalidate();
             session = request.getSession(true);
-            session.setMaxInactiveInterval(10);
+            session.setMaxInactiveInterval(Integer.parseInt(getInitParameter("maxSec")));
             
             session.setAttribute("password", password);
             session.setAttribute("todoList", new TodoList());
