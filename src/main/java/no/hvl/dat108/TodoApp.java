@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "TodoApp", urlPatterns = {"todoapp"}, loadOnStartup = 1) 
-public class WebshopServlet extends HttpServlet {
+public class TodoApp extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     private TodoList todoList = new TodoList();
@@ -40,20 +40,23 @@ public class WebshopServlet extends HttpServlet {
 
             if(session == null || session.getAttribute("password") == null) 
                 response.sendRedirect("login" + "?requiresLogin");
-            else {
-                if(request.getParameter("deleteItem") != null){
-                    todoList.removeItem(request.getParameter("deleteItem"));
+            else if(request.getParameter("deleteItem") != null){
+                    String item = request.getParameter("deleteItem").replaceAll("/", "");
+                    todoList.removeItem(item);
+                    session.setAttribute("todoList", todoList);
+                    response.sendRedirect("todoapp");
                 }
+
+            else{
                 if(request.getParameter("item") != null ) {
                     String postedItem = (String) request.getParameter("item");
                     postedItem = cleanInput(postedItem);
                     if(!Validator.isInvalid(postedItem)){
                         todoList.addItem(new TodoItem(postedItem));
                     }
+                    session.setAttribute("todoList", todoList);
+                    response.sendRedirect("todoapp");
                 };
-
-                session.setAttribute("todoList", todoList);
-                response.sendRedirect("todoapp");
-            }
+                }
     }
 }

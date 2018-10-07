@@ -1,6 +1,5 @@
 package no.hvl.dat108;
 
-import no.hvl.dat108.TodoItem;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -15,8 +15,9 @@
             <c:forEach items="${todoList.getItems()}" var="item">
                 <tr>
                 <td>
-                    <c:out value="${item.name}"/>
                     <form action="todoapp" method="POST">
+                        <c:out value="${test}"/>
+                        <c:out value="${item.name}"/>
                         <input type="hidden" name="deleteItem" value=${item.name}/>
                         <input type="submit" value="Delete"/>
                     </form>
