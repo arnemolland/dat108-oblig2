@@ -2,10 +2,12 @@
 *.class
 
 # Build files
-build
+build/*
+build\*
 
 # Gradle
-.gradle
+.gradle/
+.gradle\
 
 # Log file
 *.log
