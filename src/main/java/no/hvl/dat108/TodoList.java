@@ -6,11 +6,11 @@ import java.util.List;
 public class TodoList{
     private List<TodoItem> items = new ArrayList<>();
 
-    public void addItem(TodoItem item){
+    public synchronized void addItem(TodoItem item){
         items.add(item);
     }
 
-    public void removeItem(String item){
+    public synchronized void removeItem(String item){
         items.removeIf(s -> s.getName().equals(item));
     }
 
