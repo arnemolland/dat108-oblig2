@@ -7,11 +7,17 @@ public class TodoList{
     private List<TodoItem> items = new ArrayList<>();
 
     public synchronized void addItem(TodoItem item){
-        items.add(item);
+        synchronized(this){
+            items.add(item);
+            this.notifyAll();
+        }
     }
 
     public synchronized void removeItem(String item){
-        items.removeIf(s -> s.getName().equals(item));
+        synchronized(this){
+            items.removeIf(s -> s.getName().equals(item));
+            this.notifyAll();
+        }
     }
 
     public List<TodoItem> getItems(){
