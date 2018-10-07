@@ -3,6 +3,8 @@
 
 # Build files
 build
+bin
+
 
 # Gradle
 .gradle
@@ -15,6 +17,12 @@ build
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
+
+# Code
+.vscode
+
+# Eclipse
+.settings
 
 # Package Files #
 *.jar
