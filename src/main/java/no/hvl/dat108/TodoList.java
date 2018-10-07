@@ -13,4 +13,8 @@ public class TodoList{
     public List<TodoItem> getItems(){
         return items;
     }
+
+    public TodoList(){
+        
+    }
 }

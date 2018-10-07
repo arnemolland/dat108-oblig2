@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,29 +7,24 @@
         <title>Todo-app</title>
     </head>
     <body>
-        <p>Du er innlogget som ${password}</p>
         <p>Your Todo-items<br/></p>
         <table border="1">
             <tr>
-                <th>Vare</th>
-                <th>Pris</th>
+                <th>Item</th>
             </tr>
-            <c:forEach items="${todoItems}" var="item">
+            <c:forEach items="${todoList.getItems()}" var="item">
                 <tr>
-                <td>${item.name}</td>
+                <td><c:out value="${item.name}"/></td>
                 </tr>
             </c:forEach>
         </table><br/>
         <form action="todoapp" method="POST">
             <fieldset>
-                <legend>Handle</legend>
-                <input type="checkbox" name="bukse"/>Bukse<br/>
-                <input type="checkbox" name="genser"/>Genser<br/>
-                <p>
-                    <input type="submit" value="Legg i handlekurv"/>
-                </p>
+              <legend>Add items</legend>
+              <p>Item: <input type="text" name="item"/></p>
+              <p><input type="submit" value="Legg til"/></p>
             </fieldset>
-        </form>
+          </form>
         <form action="logout" method="GET">
             <fieldset>
                 <p>

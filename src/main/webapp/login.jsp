@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
   <head>
     <meta charset="ISO-8859-1">
@@ -7,8 +8,7 @@
   <body>
     <c:choose>
       <c:when test="${requiresLoginRedirect == true || invalidPasswordRedirect == true}">
-          <p style="color: red;">${requiresPasswordRedirect
-              ? "Request requires login" : "Invalid or missing password"}</p>
+          <p style="color: red;">${error}</p>
       </c:when>
     </c:choose>
     <form action="login" method="post">

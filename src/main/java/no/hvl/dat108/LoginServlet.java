@@ -1,5 +1,6 @@
 package no.hvl.dat108;
 
+import static no.hvl.dat108.Validator.getErrorMessage;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.*;
@@ -7,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
 
 @WebServlet(name = "LoginServlet", urlPatterns = {"login", "/"}, loadOnStartup = 1, initParams = {@WebInitParam(name="pwd", value="dat108")}) 
 public class LoginServlet extends HttpServlet {
@@ -20,8 +24,12 @@ public class LoginServlet extends HttpServlet {
         boolean invalidPasswordRedirect = request
         .getParameter("invalidPassword") != null;
 
+        String error = "";
+        if(requiresLoginRedirect == true || invalidPasswordRedirect == true)
+            error = getErrorMessage(requiresLoginRedirect, invalidPasswordRedirect);
         response.setContentType("text/hmtl; charset=ISO-8859-1");
 
+        request.setAttribute("error", error);
         request.setAttribute("requiresLoginRedirect", requiresLoginRedirect);
         request.setAttribute("invalidPasswordRedirect", invalidPasswordRedirect);
         request.getRequestDispatcher("login.jsp").forward(request, response);
@@ -30,8 +38,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request,
     HttpServletResponse response) throws ServletException, IOException {
         
-        String password = request.getParameter("passwords");
-
+        String password = Jsoup.clean(request.getParameter("password"), Whitelist.none());
         if(password == null || !password.equals(getInitParameter("pwd")))
             response.sendRedirect("login" + "?invalidPassword");
         else {

@@ -1,5 +1,6 @@
 package no.hvl.dat108;
 
+import static no.hvl.dat108.Validator.cleanInput;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +18,6 @@ public class WebshopServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
-        response.getWriter().print("Hello, World!");
         HttpSession session = request.getSession(false);
 
         if(session == null || session.getAttribute("password") == null)
@@ -41,14 +41,15 @@ public class WebshopServlet extends HttpServlet {
             if(session == null || session.getAttribute("password") == null) 
                 response.sendRedirect("login" + "?requiresLogin");
             else {
-                 todoList = (TodoList) session.getAttribute("todoList");
+                if(request.getParameter("item") != null ) {
+                    String postedItem = (String) request.getParameter("item");
+                    postedItem = cleanInput(postedItem);
+                    if(!Validator.isInvalid(postedItem)){
+                        todoList.addItem(new TodoItem(postedItem));
+                    }
+                };
 
-                if(request.getParameter("bukse") != null) {
-                    todoList.addItem(new TodoItem("Bukse"));
-                }
-                if(request.getParameter("genser") != null) {
-                    todoList.addItem(new TodoItem("Genser"));
-                }
+                session.setAttribute("todoList", todoList);
                 response.sendRedirect("todoapp");
             }
     }
